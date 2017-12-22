@@ -10,16 +10,42 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet var cardButtons: [UIButton]!
+    
+    var flipCount = 0 {
+        didSet {
+            flipCountLabel.text = "Flips: \(flipCount)"
+        }
+    }
+    
+    @IBAction func touchCard(_ sender: UIButton!) {
+        flipCount += 1
+        if let cardNumber = cardButtons.index(of: sender) {
+            flipCard(withEmoji: emojis[cardNumber], on: sender)
+        } else {
+            print("Card not found!")
+        }
+    }
+    
+    let emojis = ["陈", "健", "好", "人"]
+    
+    private func flipCard(withEmoji emoji: String, on card: UIButton) {
+            if card.currentTitle == nil {
+                card.setTitle(emoji, for: UIControlState.normal)
+                card.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            } else {
+                card.setTitle(nil, for: UIControlState.normal)
+                card.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+            }
+    }
+    
+    // MARK: - View Controller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        flipCount = 0
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 
