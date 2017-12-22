@@ -9,15 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var flipCountLabel: UILabel!
-    @IBOutlet var cardButtons: [UIButton]!
     
-    var flipCount = 0 {
+    // MARK: - Private Member
+    
+    private let emojis = ["陈", "健", "好", "人"]
+    
+    private var flipCount = 0 {
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
+    
+    // MARK: - User Interface
+
+    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func touchCard(_ sender: UIButton!) {
         flipCount += 1
@@ -28,7 +34,7 @@ class ViewController: UIViewController {
         }
     }
     
-    let emojis = ["陈", "健", "好", "人"]
+    // MARK: - Private Implementation
     
     private func flipCard(withEmoji emoji: String, on card: UIButton) {
             if card.currentTitle == nil {
